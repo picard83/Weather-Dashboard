@@ -1,1 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+}
 
+.header {
+  background-color: #333; /* Dark background color for the header */
+  color: #fff; /* Text color for the header */
+  padding: 20px; /* Add padding to create space around the text */
+  position: fixed; /* Fix the header at the top of the screen */
+  width: 100%; /* Make the header span the entire width of the screen */
+  top: 0; /* Position the header at the top of the screen */
+  z-index: 999; /* Ensure the header stays on top of other elements */
+  text-align: center;
+}
+
+.header-title {
+  margin: 0; /* Remove default margin for the title */
+}
