@@ -1,19 +1,121 @@
 body {
   margin: 0;
   padding: 0;
+  padding-top: 80px;
+  position: relative;
 }
 
 .header {
-  background-color: #333; /* Dark background color for the header */
-  color: #fff; /* Text color for the header */
-  padding: 20px; /* Add padding to create space around the text */
-  position: fixed; /* Fix the header at the top of the screen */
-  width: 100%; /* Make the header span the entire width of the screen */
-  top: 0; /* Position the header at the top of the screen */
-  z-index: 999; /* Ensure the header stays on top of other elements */
+  background-color: rgba(10, 148, 233, 0.2); /* White with 80% opacity */
+  color: #200be4;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
   text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .header-title {
-  margin: 0; /* Remove default margin for the title */
+  margin: 0;
+}
+
+.search-for-city {
+  position: absolute;
+  top: 100px; /* Adjust positioning from top */
+  right: calc(50% + 700px);
+}
+/* Style for search container */
+.search-container {
+  position: absolute;
+  top: 150px; /* Adjust positioning from top */
+  right: calc(50% + 600px); /* Adjust positioning from right */
+}
+.search-container::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  width: 290px; /* Same width as search container */
+  height: 2px;
+  background-color: blue;
+}
+
+/* Style for search box */
+.search-box {
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Style for search button */
+.search-button {
+  padding: 8px 12px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.div1 {
+  width: 800px;
+  height: 200px;
+  position: absolute;
+  top: 100px;
+  left: calc(50% - 350px); /* Adjust positioning from left */
+  border: 1.7px solid rgb(42, 7, 217);
+
+  margin-bottom: 30px;
+}
+
+.weather-block-container {
+  display: flex;
+  position: absolute;
+  top: 350px;
+  left: calc(50% - 415px); /* Adjust positioning from left */
+}
+
+.weather-blocks {
+  width: 150px;
+  height: 300px;
+  margin-right: 10px;
+  border: 1.5px solid rgb(42, 7, 217);
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+  margin: 20px;
+}
+
+.example-heading {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.city-btns-container {
+  position: absolute;
+  top: 250px; /* Adjust positioning from top */
+  right: calc(50% + 570px);
+
+  /* Adjust positioning from top */
+}
+
+.city-btns {
+  margin: 20px;
+  width: 300px;
+  height: 50px;
+  border: 1.2px solid rgb(42, 7, 217);
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+}
+
+.city-btns:hover {
+  background-color: rgba(10, 148, 233, 0.2); /* White with 80% opacity */
+  cursor: pointer;
+  box-shadow: rgba(86, 203, 245, 0.45) 0px 25px 20px -20px;
 }
