@@ -19,8 +19,6 @@ searchBtn.addEventListener("click", function () {
       getForecast(latitude, longitude);
       getTodayForecast(latitude, longitude);
     });
-
-  searchBtn.style.backgroundcolor = "red";
 });
 function getForecast(lat, lon) {
   const url = `${baseUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
@@ -30,7 +28,16 @@ function getForecast(lat, lon) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      let dt;
+      const filteredData = [];
+      for (let tw of data.list) {
+        let date = tw.dt_txt.split(" ")[0].split("-")[2];
+        if (dt != date) {
+          filteredData.push(tw);
+          dt = date;
+        }
+      }
+      showFiveDayForecast(filteredData);
     });
 }
 function getTodayForecast(lat, lon) {
@@ -41,7 +48,7 @@ function getTodayForecast(lat, lon) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      // console.log(data);
       showTodayWeather(data);
     });
 }
@@ -67,20 +74,27 @@ function showTodayWeather(data) {
 
   const humidity = document.querySelector(".humidity");
   humidity.innerHTML = humidityVar;
-  ////////////////////////////////////////
+  //////////////////////////////////////
   // weather blocks data ///
 
-  const block1 = document.querySelector(".block1");
-  const block1Date = block1.querySelector(".date");
-  block1Date;
-  block1Date.innerHTML = `${new Date(data.dt * 1000).toLocaleDateString()}`;
+  // const block1 = document.querySelector(".block1");
+  // const block1Date = block1.querySelector(".date");
+  // block1Date;
+  // block1Date.innerHTML = `${new Date(data.dt * 1000).toLocaleDateString()}`;
 
-  const block1Icon = block1.querySelector(".icon");
-  block1Icon.innerHTML = `<img class='icon-img' src='${iconUrl}${data.weather[0].icon}@2x.png'> `;
-  block1Icon.style.width = "75px";
+  // const block1Icon = block1.querySelector(".icon");
+  // block1Icon.innerHTML = `<img class='icon-img' src='${iconUrl}${data.weather[0].icon}@2x.png'> `;
+  // block1Icon.style.width = "75px";
 
-  const block1Temp = block1.querySelector(".temperature");
-  block1Temp.innerHTML = temperature;
+  // const block1Temp = block1.querySelector(".temperature");
+  // block1Temp.innerHTML = temperature;
 
-  console.log(data.list[10]);
+  // console.log(data);
+}
+function showFiveDayForecast(data) {
+  console.log(data[0].dt_txt);
+
+  for (let i = 0; i < data.length; i++) {
+    console.log(data[i]);
+  }
 }
