@@ -3,6 +3,7 @@ const baseUrl = "http://api.openweathermap.org";
 const searchBox = document.querySelector(".search-box");
 const searchBtn = document.querySelector(".search-button");
 const iconUrl = "https://openweathermap.org/img/wn/";
+const weatherBlocks = document.querySelectorAll(".weather-blocks");
 
 searchBtn.addEventListener("click", function () {
   let city = searchBox.value;
@@ -74,6 +75,7 @@ function showTodayWeather(data) {
 
   const humidity = document.querySelector(".humidity");
   humidity.innerHTML = humidityVar;
+
   //////////////////////////////////////
   // weather blocks data ///
 
@@ -91,10 +93,16 @@ function showTodayWeather(data) {
 
   // console.log(data);
 }
+let dateDiv;
 function showFiveDayForecast(data) {
-  console.log(data[0].dt_txt);
+  console.log(data);
 
   for (let i = 0; i < data.length; i++) {
-    console.log(data[i]);
+    const dateDiv = document.querySelector(`.date-div-${(i % 5) + 1}`);
+    dateDiv.classList.add("weather-block-style");
+    dateDiv.innerHTML = ` <p>${data[i].dt_txt.split(" ")[0]}</p><br>
+    <p>Temp: ${data[i].main.temp} F</p><br>
+    <p>Wind: ${data[i].wind.speed} MPH</p><br>
+    Humidity: ${data[i].main.humidity}%`;
   }
 }
