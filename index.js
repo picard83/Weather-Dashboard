@@ -4,6 +4,7 @@ const searchBox = document.querySelector(".search-box");
 const searchBtn = document.querySelector(".search-button");
 const iconUrl = "https://openweathermap.org/img/wn/";
 const weatherBlocks = document.querySelectorAll(".weather-blocks");
+const cityButtons = document.querySelectorAll(".city-btns");
 
 searchBtn.addEventListener("click", function () {
   let city = searchBox.value;
@@ -100,9 +101,23 @@ function showFiveDayForecast(data) {
   for (let i = 0; i < data.length; i++) {
     const dateDiv = document.querySelector(`.date-div-${(i % 5) + 1}`);
     dateDiv.classList.add("weather-block-style");
+    const iconUrl = "https://openweathermap.org/img/wn/";
+    const iconImg = `<img class='icon-img' src='${iconUrl}${data[i].weather[0].icon}@2x.png'>`;
+
     dateDiv.innerHTML = ` <p>${data[i].dt_txt.split(" ")[0]}</p><br>
+    ${iconImg}
     <p>Temp: ${data[i].main.temp} F</p><br>
     <p>Wind: ${data[i].wind.speed} MPH</p><br>
     Humidity: ${data[i].main.humidity}%`;
   }
 }
+
+function cityBtnsClick() {
+  cityButtons.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      searchBox.value = btn.textContent;
+      searchBtn.click();
+    });
+  });
+}
+cityBtnsClick();

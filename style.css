@@ -54,8 +54,8 @@ body {
 }
 
 .city-weather {
-  width: 800px;
-  height: 200px;
+  width: 850px;
+  height: 250px;
   border: 1.7px solid rgb(42, 7, 217);
   padding: 10px;
   margin-bottom: 45px;
@@ -67,13 +67,15 @@ body {
 }
 
 .weather-blocks {
-  width: 150px;
-  height: 300px;
+  width: 200px;
+  height: 400px;
   margin-right: 10px;
   border: 1.5px solid rgb(42, 7, 217);
   box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
     rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
   margin: 20px;
+  color: white;
+  background-color: #110580;
 }
 
 .weather-block-style {
