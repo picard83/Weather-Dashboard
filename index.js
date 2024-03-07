@@ -5,7 +5,9 @@ const searchBtn = document.querySelector(".search-button");
 const iconUrl = "https://openweathermap.org/img/wn/";
 const weatherBlocks = document.querySelectorAll(".weather-blocks");
 const cityButtons = document.querySelectorAll(".city-btns");
-
+const cityButtonsContainer = document.querySelector(".city-btns-container");
+let currentCityIndex = 0;
+showCities();
 searchBtn.addEventListener("click", function () {
   let city = searchBox.value;
 
@@ -20,8 +22,13 @@ searchBtn.addEventListener("click", function () {
       let longitude = data[0].lon;
       getForecast(latitude, longitude);
       getTodayForecast(latitude, longitude);
+      addCityToLocalStorage(city);
+      showCities();
     });
+
+  console.log(city);
 });
+////////////////////////////////////////////////////////
 function getForecast(lat, lon) {
   const url = `${baseUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
 
@@ -96,8 +103,6 @@ function showTodayWeather(data) {
 }
 let dateDiv;
 function showFiveDayForecast(data) {
-  console.log(data);
-
   for (let i = 0; i < data.length; i++) {
     const dateDiv = document.querySelector(`.date-div-${(i % 5) + 1}`);
     dateDiv.classList.add("weather-block-style");
@@ -112,12 +117,38 @@ function showFiveDayForecast(data) {
   }
 }
 
-function cityBtnsClick() {
-  cityButtons.forEach((btn) => {
-    btn.addEventListener("click", function () {
-      searchBox.value = btn.textContent;
-      searchBtn.click();
-    });
-  });
+function getDataFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("cities")) || [];
 }
-cityBtnsClick();
+
+function addCityToLocalStorage(city) {
+  let cities = getDataFromLocalStorage();
+
+  cities.push(city);
+
+  localStorage.setItem("cities", JSON.stringify(cities));
+}
+// function showCities() {
+//   let cities = getDataFromLocalStorage();
+//   let html = "";
+//   for (let i = 0; i < cities.length; i++) {
+//     html += `<button class="city-btns" id="city1">${cities}</button>`;
+//     console.log(cities);
+//   }
+// }
+function showCities() {
+  let cities = getDataFromLocalStorage();
+  cities = cities.slice(-5);
+  cityButtonsContainer.innerHTML = ""; // Clear existing buttons
+
+  for (let i = 0; i < cities.length && i < 5; i++) {
+    const cityBtn = document.createElement("button");
+    cityBtn.classList.add("city-btns");
+    cityBtn.textContent = cities[i];
+    cityBtn.addEventListener("click", function () {
+      searchBox.value = cities[i]; // Set the search box value to the clicked city
+      searchBtn.click(); // Trigger search button click
+    });
+    cityButtonsContainer.appendChild(cityBtn);
+  }
+}
